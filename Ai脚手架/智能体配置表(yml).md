@@ -1,0 +1,146 @@
+# 流程设计
+
+分三层
+
+应用名称：appname
+
+智能体描述：agentid agentname agentdesc
+
+智能体模块：
+
+​	aiapi
+
+​	charmodel：
+
+​			工具列表
+
+​	list<agent>要用的那些智能体
+
+​	workflow代表工作调度
+
+​		其中包含工作流的执行方式，并行 循环 串行
+
+​		引用了哪些子agent 
+
+```yaml
+ai:
+  agent:
+    config:
+      tables:
+        testAgent:
+          app-name: testAgent
+          agent:
+            agent-id: 100001
+            agent-name: 测试智能体01
+            agent-desc: 一个测试的智能体
+          module:
+            ai-api:
+              base-url: https://apis.itedus.cn
+              api-key: sk-Sp2jx3yeq7x7HJ663bDc9bF0D34b4...配置你的apiKey
+              completions-path: v1/chat/completions
+              embeddings-path: v1/embeddings
+            chat-model:
+              model: gpt-4.1
+              tool-mcp-list:
+                - sse:
+                    name: baidu-search
+                    base-uri: https://appbuilder.baidu.com/v2/ai_search/mcp/
+                    sse-endpoint: sse?api_key=bce-v3/ALTAK-3zODLb9qHozIftQlGwez5/2696e92781f5bf1ba1870e2958f239fd6dc822a4
+                    request-timeout: 5000
+                - sse:
+                    name: baidu-map
+                    base-uri: https://mcp.map.baidu.com/
+                    sse-endpoint: sse?ak=tV0NsP4Gmj8IL7mhvyjVZ7c6
+                    request-timeout: 5000
+            agents:
+              - name: CodeWriterAgent
+                description: Writes initial Java code based on a specification.
+                instruction: |
+                  You are a Java Code Generator.
+                  Based *only* on the user's request, write Java code that fulfills the requirement.
+                  Output *only* the complete Java code block, enclosed in triple backticks (...).
+                output-key: generated_code
+              - name: CodeReviewerAgent
+                description: Reviews code and provides feedback.
+                instruction: |
+                  You are an expert Java Code Reviewer.
+                  Your task is to provide constructive feedback on the provided code.
+  
+                  **CodetoReview:** 
+                  
+                  {generated_code}
+                 
+  
+                  **ReviewCriteria:** 
+                  1.  **Correctness:**  Does the code work as intended? Are there logic errors?
+                  2.  **Readability:**  Is the code clear and easy to understand? Follows Java style guidelines?
+                  3.  **Efficiency:**  Is the code reasonably efficient? Any obvious performance bottlenecks?
+                  4.  **EdgeCases:**  Does the code handle potential edge cases or invalid inputs gracefully?
+                  5.  **BestPractices:**  Does the code follow common Java best practices?
+  
+                  **Output:** 
+                  Provide your feedback as a concise, bulleted list. Focus on the most important points for improvement.
+                  If the code is excellent and requires no changes, simply state: "No major issues found."
+                  Output *only* the review comments or the "No major issues" statement.
+                output-key: review_comments
+              - name: CodeRefactorerAgent
+                description: Refactors code based on review comments.
+                instruction: |
+                  You are a Java Code Refactoring AI.
+                  Your goal is to improve the given Java code based on the provided review comments.
+  
+                  **OriginalCode:** 
+                 
+                  {generated_code}
+                 
+  
+                  **ReviewComments:** 
+                  {review_comments}
+  
+                  **Task:** 
+                  Carefully apply the suggestions from the review comments to refactor the original code.
+                  If the review comments state "No major issues found," return the original code unchanged.
+                  Ensure the final code is complete, functional, and includes necessary imports and docstrings.
+  
+                  **Output:** 
+                  Output *only* the final, refactored Java code block, enclosed in triple backticks (...).
+                  Do not add any other text before or after the code block.
+                output-key: refactored_code
+            agent-workflows:
+              - type: sequential
+                name: CodePipelineAgent
+                description: Executes a sequence of code writing, reviewing, and refactoring.
+                sub-agents:
+                  - CodeWriterAgent
+                  - CodeReviewerAgent
+                  - CodeRefactorerAgent
+```
+
+## 配置加载过程
+
+```java
+@Slf4j
+@Configuration
+@EnableConfigurationProperties(AiAgentAutoConfigProperties.class)
+public class AiAgentAutoConfig implements ApplicationListener<ApplicationReadyEvent> {
+
+    @Resource
+    private AiAgentAutoConfigProperties aiAgentAutoConfigProperties;
+
+    @Override
+    public void onApplicationEvent(ApplicationReadyEvent event) {
+        try {
+            log.info("Ai Agent 智能体装配 {}", JSON.toJSONString(aiAgentAutoConfigProperties.getTables().values()));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}
+```
+
+#### 使用钩子函数 在容器就绪时立马打印装配结果
+
+@EnableConfigurationProperties(AiAgentAutoConfigProperties.class)这个注解主要就是加载yml里对应的表配置
+
+这个注解 啊 就是说将装满了数据的AiAgentAutoConfigProperties类 去变成一个ioc容器中的一个单例
