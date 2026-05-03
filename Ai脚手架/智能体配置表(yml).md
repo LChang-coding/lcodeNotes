@@ -33,7 +33,7 @@ ai:
             agent-id: 100001
             agent-name: 测试智能体01
             agent-desc: 一个测试的智能体
-          module:
+           module:
             ai-api:
               base-url: https://apis.itedus.cn
               api-key: sk-Sp2jx3yeq7x7HJ663bDc9bF0D34b4...配置你的apiKey
