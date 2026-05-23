@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html><head><style>
+html { background: #0B1120; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #0B1120; font-family: Arial, sans-serif; display: flex;
+}
+.header {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #060918;
+  padding: 18pt 50pt; border-bottom: 2pt solid #7C3AED;
+}
+.header h2 { color: #FFFFFF; font-size: 22pt; margin: 0; }
+.header h2 span { color: #10B981; }
+.content { margin: 75pt 50pt 30pt 50pt; display: flex; gap: 30pt; }
+.left { width: 280pt; }
+.left h3 { color: #FFFFFF; font-size: 16pt; margin: 0 0 10pt 0; }
+.left p { color: #D1D5DB; font-size: 11pt; line-height: 1.6; margin: 0 0 10pt 0; }
+.stats { display: flex; gap: 16pt; margin-top: 14pt; }
+.stat-box { background: #060918; padding: 12pt; border-left: 3pt solid #10B981; flex: 1; }
+.stat-box p { margin: 0; }
+.num { font-size: 20pt; font-weight: bold; color: #FFFFFF; }
+.label { font-size: 9pt; color: #9CA3AF; }
+.right { flex: 1; }
+.chart-area {
+  width: 330pt; height: 240pt; background: #060918;
+  border-radius: 4pt; border: 1pt solid #333;
+}
+</style></head>
+<body>
+<div class="header"><h2><span>01</span> &nbsp;AI 技术演进</h2></div>
+<div class="content">
+  <div class="left">
+    <h3>模型能力指数级增长</h3>
+    <p>从2018年的GPT-1到2026年的前沿模型，AI在推理、编程和多模态理解方面取得了跨越式进步。</p>
+    <div class="stats">
+      <div class="stat-box"><p class="num">500x</p><p class="label">计算规模增长</p></div>
+      <div class="stat-box"><p class="num">85%</p><p class="label">编码任务通过率</p></div>
+      <div class="stat-box"><p class="num">40+</p><p class="label">主流模型发布</p></div>
+    </div>
+  </div>
+  <div class="right">
+    <div id="chart" class="placeholder chart-area"></div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head><style>
+html { background: #0B1120; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #0B1120; font-family: Arial, sans-serif; display: flex;
+}
+.header {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #060918;
+  padding: 18pt 50pt; border-bottom: 2pt solid #10B981;
+}
+.header h2 { color: #FFFFFF; font-size: 22pt; margin: 0; }
+.header h2 span { color: #7C3AED; }
+.content { margin: 75pt 50pt 30pt 50pt; display: flex; gap: 30pt; }
+.left { flex: 1; }
+.left h3 { color: #FFFFFF; font-size: 16pt; margin: 0 0 10pt 0; }
+.left p { color: #D1D5DB; font-size: 11pt; line-height: 1.6; margin: 0 0 14pt 0; }
+.insight { background: #060918; padding: 10pt 14pt; border-radius: 4pt; border-left: 3pt solid #F59E0B; margin-bottom: 8pt; }
+.insight p { margin: 0; color: #FFFFFF; font-size: 10pt; }
+.insight p b { color: #F59E0B; }
+.right { width: 320pt; }
+.chart-area {
+  width: 320pt; height: 240pt; background: #060918;
+  border-radius: 4pt; border: 1pt solid #333;
+}
+</style></head>
+<body>
+<div class="header"><h2><span>02</span> &nbsp;行业影响分布</h2></div>
+<div class="content">
+  <div class="left">
+    <h3>AI 正在重塑每个行业</h3>
+    <p>不同行业对AI的采纳速度和应用深度各有不同，技术、金融和医疗领跑本轮变革。</p>
+    <div class="insight"><p><b>技术行业</b> — 代码生成与自动化测试已成为标配，开发效率提升40%以上</p></div>
+    <div class="insight"><p><b>金融服务</b> — 智能风控与量化交易系统全面升级，人工审核量下降60%</p></div>
+    <div class="insight"><p><b>医疗健康</b> — AI辅助诊断准确率达95%，药物研发周期缩短30%-50%</p></div>
+  </div>
+  <div class="right">
+    <div id="chart" class="placeholder chart-area"></div>
+  </div>
+</div>
+</body></html>

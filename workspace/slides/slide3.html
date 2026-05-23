@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html { background: #FFFFFF; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #FFFFFF; font-family: Arial, sans-serif;
+  display: flex; flex-direction: column;
+}
+.header {
+  background: #1C2833; padding: 28pt 40pt;
+}
+.header h2 {
+  color: #FFFFFF; font-size: 24pt; margin: 0;
+}
+.header p {
+  color: #5EA8A7; font-size: 12pt; margin: 4pt 0 0 0;
+}
+.content {
+  flex: 1; padding: 30pt 40pt;
+  display: flex; gap: 24pt;
+}
+.card {
+  flex: 1; background: #F4F6F6; padding: 20pt;
+  border-left: 6pt solid #5EA8A7;
+}
+.card h3 {
+  color: #1C2833; font-size: 16pt; margin: 0 0 8pt 0;
+}
+.card p {
+  color: #2E4053; font-size: 12pt; margin: 0 0 6pt 0;
+  line-height: 1.5;
+}
+.card .num {
+  font-size: 32pt; color: #5EA8A7; margin: 0;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <div class="header">
+    <h2>验证总结</h2>
+    <p>PPTX Skill 功能验证通过项</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <p class="num">01</p>
+      <h3>快速创建</h3>
+      <p>基于 HTML 模板，从零生成结构完整的 PPTX 文件，无需打开 PowerPoint。</p>
+    </div>
+    <div class="card">
+      <p class="num">02</p>
+      <h3>精确定位</h3>
+      <p>CSS Flexbox 布局自动转换为 PowerPoint 绝对定位，支持复杂排版。</p>
+    </div>
+    <div class="card">
+      <p class="num">03</p>
+      <h3>即插即用</h3>
+      <p>生成后可直接用 PowerPoint、Keynote 或 LibreOffice 打开编辑。</p>
+    </div>
+  </div>
+</body>
+</html>

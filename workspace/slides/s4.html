@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html><head><style>
+html { background: #0B1120; }
+body {
+  width: 720pt; height: 405pt; margin: 0; padding: 0;
+  background: #0B1120; font-family: Arial, sans-serif; display: flex;
+}
+.header {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #060918;
+  padding: 18pt 50pt; border-bottom: 2pt solid #7C3AED;
+}
+.header h2 { color: #FFFFFF; font-size: 22pt; margin: 0; }
+.header h2 span { color: #10B981; }
+.content { margin: 75pt 50pt 30pt 50pt; display: flex; gap: 30pt; }
+.left { flex: 1; }
+.left h3 { color: #FFFFFF; font-size: 16pt; margin: 0 0 10pt 0; }
+.left p { color: #D1D5DB; font-size: 11pt; line-height: 1.6; margin: 0 0 14pt 0; }
+.skill-list { margin: 0; }
+.skill-list ul { list-style: none; padding: 0; margin: 0; }
+.skill-list li { color: #D1D5DB; font-size: 11pt; margin-bottom: 6pt; padding-left: 14pt; }
+.right { width: 300pt; }
+.chart-area {
+  width: 300pt; height: 240pt; background: #060918;
+  border-radius: 4pt; border: 1pt solid #333;
+}
+</style></head>
+<body>
+<div class="header"><h2><span>03</span> &nbsp;技能转型趋势</h2></div>
+<div class="content">
+  <div class="left">
+    <h3>未来最受欢迎的五大能力</h3>
+    <p>到2030年，全球将有超过10亿个工作岗位因AI而发生根本性变化。复合型人才将成为最稀缺的资源。</p>
+    <div class="skill-list"><ul>
+      <li>AI 系统思维与提示工程</li>
+      <li>跨领域问题解决能力</li>
+      <li>数据素养与分析思维</li>
+      <li>创造力与战略思维</li>
+      <li>人机协作与伦理判断</li>
+    </ul></div>
+  </div>
+  <div class="right">
+    <div id="chart" class="placeholder chart-area"></div>
+  </div>
+</div>
+</body></html>
